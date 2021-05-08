@@ -1,4 +1,4 @@
-package com.bcq.net.wrapper;
+package com.bcq.net.wrapper.interfaces;
 
 import android.content.DialogInterface;
 

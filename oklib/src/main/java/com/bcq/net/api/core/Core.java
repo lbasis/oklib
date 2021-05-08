@@ -132,10 +132,10 @@ public class Core {
      * @param callback 回调
      */
     private final <T> void request(Request request, final IOBack<T> callback) {
-//        if (!Utils.isNetworkAvailable()) {
-//            dispatchFail(Error.NO_CONNECTED, "No Connected !", callback);
-//            return;
-//        }
+        if (!Utils.isNetworkAvailable()) {
+            dispatchFail(Error.NO_CONNECTED, "No Connected !", callback);
+            return;
+        }
         client().newCall(request)
                 .enqueue(new okhttp3.Callback() {
                     @Override

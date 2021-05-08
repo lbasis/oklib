@@ -1,24 +1,12 @@
 package com.bcq.net;
 
-import android.app.Application;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
-import android.os.Build;
-import android.text.TextUtils;
-
-import com.bcq.net.api.core.Utils;
-import com.bcq.net.wrapper.BsiCallback;
-import com.bcq.net.wrapper.Error;
-import com.bcq.net.wrapper.GeneralWrapperCallBack;
-import com.bcq.net.wrapper.ILoadTag;
-import com.bcq.net.wrapper.OkUtil;
-import com.bcq.net.wrapper.interfaces.IParse;
-import com.bcq.net.wrapper.interfaces.IResult;
 import com.bcq.net.api.Method;
 import com.bcq.net.api.ORequest;
+import com.bcq.net.wrapper.interfaces.BusiCallback;
+import com.bcq.net.wrapper.GeneralWrapperCallBack;
+import com.bcq.net.wrapper.interfaces.ILoadTag;
+import com.bcq.net.wrapper.interfaces.IParse;
+import com.bcq.net.wrapper.interfaces.IResult;
 
 import java.util.List;
 import java.util.Map;
@@ -40,7 +28,7 @@ public class Request {
                                   String url,
                                   Map<String, Object> params,
                                   Method method,
-                                  BsiCallback<IResult.StatusResult, Integer, String, Void> iCallback) {
+                                  BusiCallback<IResult.StatusResult, Integer, String, Void> iCallback) {
         return request(url,
                 params,
                 method,
@@ -51,11 +39,11 @@ public class Request {
                                        String url,
                                        Map<String, Object> params,
                                        Method method,
-                                       BsiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> bsiCallback) {
+                                       BusiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> busiCallback) {
         return request(url,
                 params,
                 method,
-                new GeneralWrapperCallBack(tag, null, bsiCallback));
+                new GeneralWrapperCallBack(tag, null, busiCallback));
     }
 
     /**
@@ -64,7 +52,7 @@ public class Request {
      * @param params      参数
      * @param parser      自定义解析器
      * @param method      Method get/post
-     * @param bsiCallback 数据集回调
+     * @param busiCallback 数据集回调
      * @return 请求封装体
      */
     public static <R> ORequest request(ILoadTag tag,
@@ -72,11 +60,11 @@ public class Request {
                                        Map<String, Object> params,
                                        IParse parser,
                                        Method method,
-                                       BsiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> bsiCallback) {
+                                       BusiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> busiCallback) {
         return request(url,
                 params,
                 method,
-                new GeneralWrapperCallBack(tag, parser, bsiCallback));
+                new GeneralWrapperCallBack(tag, parser, busiCallback));
     }
 
     /**
@@ -93,7 +81,7 @@ public class Request {
                                   Map<String, Object> params,
                                   IParse parser,
                                   Method method,
-                                  BsiCallback<IResult.StatusResult, Integer, String, Void> iCallback) {
+                                  BusiCallback<IResult.StatusResult, Integer, String, Void> iCallback) {
         return request(url,
                 params,
                 method,
@@ -101,9 +89,9 @@ public class Request {
     }
 
     public static <R> ORequest requestAgain(ORequest<R> request,
-                                            BsiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> bsiCallback) {
+                                            BusiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> busiCallback) {
         if (request.callBack instanceof GeneralWrapperCallBack) {
-            ((GeneralWrapperCallBack) request.callBack).setBsiCallback(bsiCallback);
+            ((GeneralWrapperCallBack) request.callBack).setBsiCallback(busiCallback);
         }
         return request.request();
     }

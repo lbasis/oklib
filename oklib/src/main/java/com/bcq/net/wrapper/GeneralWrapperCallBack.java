@@ -1,5 +1,7 @@
 package com.bcq.net.wrapper;
 
+import com.bcq.net.wrapper.interfaces.BusiCallback;
+import com.bcq.net.wrapper.interfaces.ILoadTag;
 import com.bcq.net.wrapper.interfaces.IParse;
 import com.bcq.net.wrapper.interfaces.IResult;
 import com.bcq.net.wrapper.interfaces.IWrap;
@@ -19,19 +21,19 @@ import okhttp3.Response;
  */
 public class GeneralWrapperCallBack<IR extends IResult<R, E>, R, E, T> extends OCallBack<IR> {
     protected final String TAG = this.getClass().getSimpleName();
-    private IParse parser;
-    private IProcess<IR, R, E, T> processor;
-    public BsiCallback<IR, R, E, T> bsiCallback;
+    private final IParse parser;
+    private final IProcess<IR, R, E, T> processor;
+    public BusiCallback<IR, R, E, T> busiCallback;
     private IWrap wrapper;
     private ILoadTag iLoadTag;
 
     /**
      * @param iLoadTag    loadTag
      * @param parser      解析器
-     * @param bsiCallback 业务回调
+     * @param busiCallback 业务回调
      */
-    public GeneralWrapperCallBack(ILoadTag iLoadTag, IParse parser, BsiCallback bsiCallback) {
-        this.bsiCallback = bsiCallback;
+    public GeneralWrapperCallBack(ILoadTag iLoadTag, IParse parser, BusiCallback busiCallback) {
+        this.busiCallback = busiCallback;
         this.iLoadTag = iLoadTag;
         this.processor = OkHelper.get().getProcessor();
         this.parser = null == parser ? OkHelper.get().getParser() : parser;
@@ -40,8 +42,8 @@ public class GeneralWrapperCallBack<IR extends IResult<R, E>, R, E, T> extends O
     /**
      * requestAgain修改callback使用
      */
-    public void setBsiCallback(BsiCallback<IR, R, E, T> bsiCallback) {
-        this.bsiCallback = bsiCallback;
+    public void setBsiCallback(BusiCallback<IR, R, E, T> busiCallback) {
+        this.busiCallback = busiCallback;
     }
 
     @Override
@@ -85,23 +87,23 @@ public class GeneralWrapperCallBack<IR extends IResult<R, E>, R, E, T> extends O
         if (!parser.ok(wrapper.getCode())) {
             if (null != processor) processor.process(wrapper.getCode(), get());
         }
-        return processor.processResult(wrapper, bsiCallback.onGetType());
+        return processor.processResult(wrapper, busiCallback.onGetType());
     }
 
     @Override
     public void onResult(IR result) {
         if (null == result) {
-            if (null != bsiCallback) bsiCallback.onError(-1, "No Result！");
+            if (null != busiCallback) busiCallback.onError(-1, "No Result！");
         } else if (null != wrapper && !parser.ok(wrapper.getCode())) {
-            if (null != bsiCallback) bsiCallback.onError(wrapper.getCode(), wrapper.getMessage());
+            if (null != busiCallback) busiCallback.onError(wrapper.getCode(), wrapper.getMessage());
         } else {
-            if (null != bsiCallback) bsiCallback.onResult(result);
+            if (null != busiCallback) busiCallback.onResult(result);
         }
     }
 
     @Override
     public void onError(int code, String msg) {
-        if (null != bsiCallback) bsiCallback.onError(code, msg);
+        if (null != busiCallback) busiCallback.onError(code, msg);
     }
 
     @Override
@@ -110,8 +112,8 @@ public class GeneralWrapperCallBack<IR extends IResult<R, E>, R, E, T> extends O
             iLoadTag.dismiss();
             iLoadTag = null;
         }
-        if (null != bsiCallback) {
-            bsiCallback.onAfter();
+        if (null != busiCallback) {
+            busiCallback.onAfter();
         }
     }
 }

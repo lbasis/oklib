@@ -1,16 +1,14 @@
-package com.bcq.net.wrapper;
-
-import com.bcq.net.wrapper.interfaces.IResult;
+package com.bcq.net.wrapper.interfaces;
 
 /**
- * 业务接口回调
+ * 业务回调接口
  *
  * @param <IR> result类型
  * @param <R>  IResult<R, E> 中R类型
  * @param <E>  IResult<R, E> 中E类型
  * @param <T>  Type Class 类型
  */
-public interface BsiCallback<IR extends IResult<R, E>, R, E, T> {
+public interface BusiCallback<IR extends IResult<R, E>, R, E, T> {
 
     /**
      * @param result

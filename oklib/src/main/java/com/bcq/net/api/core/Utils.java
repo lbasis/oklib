@@ -13,7 +13,7 @@ public class Utils {
      * 检测网络连接
      * @return
      */
-    public static boolean isNetworkAvailable() {
+    protected static boolean isNetworkAvailable() {
         ConnectivityManager manager = (ConnectivityManager) getBaseContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (null == manager) return false;

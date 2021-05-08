@@ -1,8 +1,8 @@
 package com.bcq.net.net;
 
 import com.bcq.net.Request;
-import com.bcq.net.wrapper.BsiCallback;
-import com.bcq.net.wrapper.ILoadTag;
+import com.bcq.net.wrapper.interfaces.BusiCallback;
+import com.bcq.net.wrapper.interfaces.ILoadTag;
 import com.bcq.net.wrapper.interfaces.IResult;
 import com.bcq.net.wrapper.OkUtil;
 import com.bcq.net.wrapper.interfaces.IParse;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @className: NetRefresher
  * @Description: 网络数据处理刷新器
  */
-public abstract class NetRefresher<T> implements BsiCallback<IResult.ObjResult<List<T>>, List<T>, Boolean, T> {
+public abstract class NetRefresher<T> implements BusiCallback<IResult.ObjResult<List<T>>, List<T>, Boolean, T> {
     public final static String TAG = "NetRefresher";
     private Class<T> tClass;
     private ORequest<List<T>> ORequest;

@@ -1,17 +1,9 @@
 package com.bcq.demo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 
-import com.kit.utils.Logger;
-import com.looper.Material;
-import com.looper.PipelineQueue;
-import com.looper.interfaces.IMaterial;
-
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,15 +19,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void testApply() {
-        List<IMaterial> os = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            os.add(new Material("Queue_" + i,2));
-        }
-        PipelineQueue.getQueue().apply(os);
-    }
-
     public void testKit() {
-        Logger.e("MainActivity");
     }
 }

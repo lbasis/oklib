@@ -1,6 +1,6 @@
 package com.bcq.net.net;
 
-import com.bcq.net.wrapper.BsiCallback;
+import com.bcq.net.wrapper.interfaces.BusiCallback;
 import com.bcq.net.wrapper.interfaces.IResult;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  * @ClassName: ListCallback
  * @Description: 有body网络请求的回调
  */
-public class ListCallback<R> implements BsiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> {
+public class ListCallback<R> implements BusiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> {
     private Class<R> rClass;
 
     public ListCallback(Class<R> rClass) {

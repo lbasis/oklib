@@ -1,6 +1,6 @@
 package com.bcq.net.net;
 
-import com.bcq.net.wrapper.BsiCallback;
+import com.bcq.net.wrapper.interfaces.BusiCallback;
 import com.bcq.net.wrapper.interfaces.IResult;
 
 /**
@@ -8,7 +8,7 @@ import com.bcq.net.wrapper.interfaces.IResult;
  * @ClassName: StatusCallback
  * @Description: 没有body请求回调
  */
-public class StatusCallback implements BsiCallback<IResult.StatusResult,Integer, String,Void> {
+public class StatusCallback implements BusiCallback<IResult.StatusResult,Integer, String,Void> {
 
     public StatusCallback() {
     }
