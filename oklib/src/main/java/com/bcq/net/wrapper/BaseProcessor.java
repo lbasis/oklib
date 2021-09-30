@@ -61,14 +61,13 @@ public class BaseProcessor<IR extends IResult<R, E>, R, E, T> implements IProces
             return (IR) new IResult.StatusResult(wrap.getCode(), wrap.getMessage());
         } else {
             OkUtil.e("processResult", "clazz:" + clazz.getSimpleName());
-            IPage page = wrap.getPage();
-            boolean extra = null == page ? false : (page.getPage() >= page.getTotal());
+            //boolean extra = null == page ? false : (page.getPage() >= page.getTotal());
             R result = null;
             JsonElement element = wrap.getBody();
             if (null != element) {
                 result = (R) OkUtil.json2List(wrap.getBody(), clazz);
             }
-            return (IR) new IResult.ObjResult(result, extra);
+            return (IR) new IResult.ObjResult(result, wrap.getPage());
         }
     }
 }

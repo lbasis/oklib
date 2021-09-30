@@ -2,9 +2,20 @@ package com.bcq.net.wrapper.interfaces;
 
 import java.util.List;
 
+/**
+ * @param <R>
+ * @param <E>
+ */
 public interface IResult<R, E> {
+
+    /**
+     * @return 结果集
+     */
     R getResult();
 
+    /**
+     * @return 额外信息
+     */
     E getExtra();
 
     class WrapResult<R, E> implements IResult<R, E> {
@@ -28,7 +39,7 @@ public interface IResult<R, E> {
     }
 
     /**
-     *  已经废弃,使用ObjResult<List<R>> 替代
+     * 已经废弃,使用ObjResult<List<R>> 替代
      */
     @Deprecated
     class ListResult<R> extends WrapResult<List<R>, Boolean> {
@@ -39,13 +50,15 @@ public interface IResult<R, E> {
 
     /**
      * 数据集结果封装
+     *
      * @param <R>
      */
-    class ObjResult<R> extends WrapResult<R, Boolean> {
-        public ObjResult(R result, Boolean extra) {
-            super(result, extra);
+    class ObjResult<R> extends WrapResult<R, IPage> {
+        public ObjResult(R result, IPage page) {
+            super(result, page);
         }
     }
+
 
     /**
      * 状态结果封装

@@ -1,5 +1,6 @@
 package com.bcq.net.net;
 
+import com.bcq.net.wrapper.OkUtil;
 import com.bcq.net.wrapper.interfaces.BusiCallback;
 import com.bcq.net.wrapper.interfaces.IResult;
 
@@ -8,7 +9,8 @@ import com.bcq.net.wrapper.interfaces.IResult;
  * @ClassName: StatusCallback
  * @Description: 没有body请求回调
  */
-public class StatusCallback implements BusiCallback<IResult.StatusResult,Integer, String,Void> {
+public class StatusCallback implements BusiCallback<IResult.StatusResult, Integer, String, Void> {
+    protected final String TAG = this.getClass().getSimpleName();
 
     public StatusCallback() {
     }
@@ -18,14 +20,15 @@ public class StatusCallback implements BusiCallback<IResult.StatusResult,Integer
      */
     @Override
     public void onResult(IResult.StatusResult result) {
-
     }
 
     /**
-     * @param message 错误信息
+     * @param code 错误码
+     * @param msg  错误信息
      */
     @Override
-    public void onError(int code, String message) {
+    public void onError(int code, String msg) {
+        OkUtil.e(TAG, "onError:[" + code + "] message = " + msg);
     }
 
     @Override

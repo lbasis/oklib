@@ -7,9 +7,7 @@ public interface Page {
     int getFirstIndex();
 
     /**
-     * 分页设置的每页的记录数 如：15条
-     *
-     * @return
+     * @return 分页设置的每页的记录数 如：15条
      */
     int geSize();
 

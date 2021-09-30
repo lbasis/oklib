@@ -60,6 +60,20 @@ public class Transform {
      * @return RequestBody
      */
     public static RequestBody param2Body(Map<String, Object> params) {
+        boolean hasBody = false;
+        if (null != params) {
+            for (Object v : params.values()) {
+                if (v instanceof IBody) {
+                    hasBody = true;
+                    break;
+                }
+            }
+        }
+        // 检测包含IBody
+        if (hasBody) {
+            return param2Builder(params).build();
+        }
+        // 使用formType
         switch (formType) {
             case form:
                 return param2Builder(params).build();
@@ -88,7 +102,8 @@ public class Transform {
         if (null == url || null == params || params.isEmpty()) return url;
         Uri.Builder builder = Uri.parse(url).buildUpon();
         for (Map.Entry<String, Object> entry : params.entrySet()) {
-            builder.appendQueryParameter(entry.getKey(), entry.getValue().toString());
+            Object v = entry.getKey();
+            builder.appendQueryParameter(entry.getKey(), v == null ? "" : v.toString());
         }
         return builder.build().toString();
     }

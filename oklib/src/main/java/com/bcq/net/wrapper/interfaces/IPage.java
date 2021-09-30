@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 /**
  * @author: BaiCQ
- * @ClassName: DataInfo
+ * @ClassName: IPage
  * @date: 2018/6/27
- * @Description: DataInfo Json解析实体
+ * @Description: result的分页信息接口
  */
 public interface IPage extends Serializable {
     int getPage();

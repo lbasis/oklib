@@ -28,8 +28,8 @@ public class GeneralWrapperCallBack<IR extends IResult<R, E>, R, E, T> extends O
     private ILoadTag iLoadTag;
 
     /**
-     * @param iLoadTag    loadTag
-     * @param parser      解析器
+     * @param iLoadTag     loadTag
+     * @param parser       解析器
      * @param busiCallback 业务回调
      */
     public GeneralWrapperCallBack(ILoadTag iLoadTag, IParse parser, BusiCallback busiCallback) {
@@ -68,8 +68,7 @@ public class GeneralWrapperCallBack<IR extends IResult<R, E>, R, E, T> extends O
         int httpCode = response.code();
         OkUtil.e(TAG, "url = " + get().url + "\nhttpCode = " + httpCode + " res = " + res);
         if (null == res || "".equals(res)) {
-            OkUtil.e(TAG, "未知错误：Response No Body ！");
-            return null;
+            OkUtil.e(TAG, "未知：Response No Body ！");
         }
         if (null == parser) {
             OkUtil.e(TAG, "No Set Parser ！");

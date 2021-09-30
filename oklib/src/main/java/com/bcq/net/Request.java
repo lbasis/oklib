@@ -5,6 +5,7 @@ import com.bcq.net.api.ORequest;
 import com.bcq.net.wrapper.interfaces.BusiCallback;
 import com.bcq.net.wrapper.GeneralWrapperCallBack;
 import com.bcq.net.wrapper.interfaces.ILoadTag;
+import com.bcq.net.wrapper.interfaces.IPage;
 import com.bcq.net.wrapper.interfaces.IParse;
 import com.bcq.net.wrapper.interfaces.IResult;
 
@@ -14,7 +15,7 @@ import java.util.Map;
 
 /**
  * @author: BaiCQ
- * @ClassName: NetApi
+ * @ClassName: Request
  * @Description: 网络请求工具类
  * request:
  * 请求获取数据相关api 返回数据集
@@ -22,7 +23,6 @@ import java.util.Map;
  * 提交操作相关api 返回状态
  */
 public class Request {
-    public final static String TAG = "Request";
 
     public static ORequest status(ILoadTag tag,
                                   String url,
@@ -39,7 +39,7 @@ public class Request {
                                        String url,
                                        Map<String, Object> params,
                                        Method method,
-                                       BusiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> busiCallback) {
+                                       BusiCallback<IResult.ObjResult<List<R>>, List<R>, IPage, R> busiCallback) {
         return request(url,
                 params,
                 method,
@@ -47,11 +47,11 @@ public class Request {
     }
 
     /**
-     * @param tag         load视图
-     * @param url         地址
-     * @param params      参数
-     * @param parser      自定义解析器
-     * @param method      Method get/post
+     * @param tag          load视图
+     * @param url          地址
+     * @param params       参数
+     * @param parser       自定义解析器
+     * @param method       Method get/post
      * @param busiCallback 数据集回调
      * @return 请求封装体
      */
@@ -60,7 +60,7 @@ public class Request {
                                        Map<String, Object> params,
                                        IParse parser,
                                        Method method,
-                                       BusiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> busiCallback) {
+                                       BusiCallback<IResult.ObjResult<List<R>>, List<R>, IPage, R> busiCallback) {
         return request(url,
                 params,
                 method,
@@ -89,7 +89,7 @@ public class Request {
     }
 
     public static <R> ORequest requestAgain(ORequest<R> request,
-                                            BusiCallback<IResult.ObjResult<List<R>>, List<R>, Boolean, R> busiCallback) {
+                                            BusiCallback<IResult.ObjResult<List<R>>, List<R>, IPage, R> busiCallback) {
         if (request.callBack instanceof GeneralWrapperCallBack) {
             ((GeneralWrapperCallBack) request.callBack).setBsiCallback(busiCallback);
         }
