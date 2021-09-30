@@ -9,6 +9,6 @@ allprojects {
 		}
 	}
 #### 第二步：添加远程依赖
-  implementation 'com.github.lbasis:adapter:Tag'
+  implementation 'com.github.lbasis:oklib:Tag'
 #### 最新版本：v1.02
-implementation 'com.github.lbasis:adapter:1.0.2'
+implementation 'com.github.lbasis:oklib:1.0.2'
